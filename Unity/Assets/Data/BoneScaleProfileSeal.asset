@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02cecc5a9155a1499a6517a1c5e76c1, type: 3}
+  m_Name: BoneScaleProfileSeal
+  m_EditorClassIdentifier: 
+  boneKeys: {fileID: 11400000, guid: 358e7ed6ab2c4764caa28b520cbda085, type: 2}
+  scales:
+  - boneKey: mixamorig:Hips
+    scale: {x: 1, y: 1.2, z: 1}
+  - boneKey: mixamorig:LeftUpLeg
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  - boneKey: mixamorig:LeftLeg
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  - boneKey: mixamorig:LeftFoot
+    scale: {x: 1, y: 1, z: 1}
+  - boneKey: mixamorig:RightUpLeg
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  - boneKey: mixamorig:RightLeg
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  - boneKey: mixamorig:RightFoot
+    scale: {x: 1, y: 1, z: 1}
+  - boneKey: mixamorig:Spine
+    scale: {x: 1, y: 2, z: 1}
+  - boneKey: mixamorig:Spine1
+    scale: {x: 1, y: 1, z: 1}
+  - boneKey: mixamorig:Spine2
+    scale: {x: 1.4, y: 1.4, z: 2}
+  - boneKey: mixamorig:LeftShoulder
+    scale: {x: 1.4, y: 1, z: 1}
+  - boneKey: mixamorig:LeftArm
+    scale: {x: 1, y: 0.3, z: 0.3}
+  - boneKey: mixamorig:LeftForeArm
+    scale: {x: 1, y: 0.5, z: 0.5}
+  - boneKey: mixamorig:LeftHand
+    scale: {x: 1, y: 0.5, z: 0.5}
+  - boneKey: mixamorig:Neck
+    scale: {x: 0.8, y: 0.5, z: 0.8}
+  - boneKey: mixamorig:Head
+    scale: {x: 1.4, y: 1, z: 1}
+  - boneKey: mixamorig:RightShoulder
+    scale: {x: 1.4, y: 1, z: 1}
+  - boneKey: mixamorig:RightArm
+    scale: {x: 1, y: 0.3, z: 0.3}
+  - boneKey: mixamorig:RightForeArm
+    scale: {x: 1, y: 0.5, z: 0.5}
+  - boneKey: mixamorig:RightHand
+    scale: {x: 1, y: 0.5, z: 0.5}

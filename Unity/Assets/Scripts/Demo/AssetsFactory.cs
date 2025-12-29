@@ -1,4 +1,6 @@
-﻿using Erter.CharacterDeformation;
+﻿using Assets.Scripts.CharacterDeformation.Controller;
+using Assets.Scripts.CharacterDeformation.Model;
+using Erter.CharacterDeformation;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,15 +8,18 @@ namespace Erter.Demo
 {
 	public class AssetsFactory
 	{
-		private IRigBuilder rigBuilder;
-		private List<IBoneScalingDefinition> boneScalingDefinitions;
+		private IRigFactory rigFactory;
+		private IBoneScaleRegistry boneScaleRegistry;
+		private IRigBlender rigBlender;
 
 		public AssetsFactory(
-			IRigBuilder rigBuilder,
-			List<IBoneScalingDefinition> boneScalingDefinitions)
+			IRigFactory rigFactory,
+			IBoneScaleRegistry boneScaleRegistry,
+			IRigBlender rigBlender)
 		{
-			this.rigBuilder = rigBuilder;
-			this.boneScalingDefinitions = boneScalingDefinitions;
+			this.rigFactory = rigFactory;
+			this.boneScaleRegistry = boneScaleRegistry;
+			this.rigBlender = rigBlender;
 		}
 
 		public void CreateHumanoidCharacterRig()
@@ -24,8 +29,9 @@ namespace Erter.Demo
 			var humanoidCharacterRig = GameObject.Instantiate(humanoidCharacterRigResource);
 			humanoidCharacterRig.AddComponent<BoneScalerUpdate>();
 			var boneScalerUpdate = humanoidCharacterRig.AddComponent<BoneScalerUpdate>();
-			var rig = humanoidCharacterRig.AddComponent<RootBoneProvider>();
-			boneScalerUpdate.Init(rig, rigBuilder, boneScalingDefinitions);
+			var rootBoneProvider = humanoidCharacterRig.AddComponent<RootBoneProvider>();
+			var rig = rigFactory.BuildRig(rootBoneProvider, boneScaleRegistry.BoneKeyDefinition.boneKeys);
+			boneScalerUpdate.Init(boneScaleRegistry, rig, rigBlender);
 		}
 
 		public void CreateCamera()

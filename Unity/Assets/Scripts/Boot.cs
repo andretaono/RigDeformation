@@ -1,3 +1,4 @@
+using Assets.Scripts.CharacterDeformation.Model;
 using Erter.CharacterDeformation;
 using Erter.Demo;
 using UnityEngine;
@@ -8,11 +9,14 @@ namespace Erter
 	{
 		public void Awake()
 		{
-			var characterDeformationSystem = new CharacterDeformationSystem();
+			var boneScaleRegistry = Resources.Load("BoneScaleRegistry") as IBoneScaleRegistry;
+
+			var characterDeformationSystem = new CharacterDeformationSystem(boneScaleRegistry);
 
 			var assetsFactory = new AssetsFactory(
-				characterDeformationSystem.RigBuilder,
-				new BoneScalingDefinitionsData().Data);
+				characterDeformationSystem.RigFactory,
+				boneScaleRegistry,
+				characterDeformationSystem.RigBlender);
 
 			assetsFactory.CreateHumanoidCharacterRig();
 			assetsFactory.CreateCamera();

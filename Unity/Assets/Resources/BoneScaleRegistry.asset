@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c4fa4fdb34142458352fd37d9878ab, type: 3}
+  m_Name: BoneScaleRegistry
+  m_EditorClassIdentifier: 
+  boneKeyDefinition: {fileID: 11400000, guid: 358e7ed6ab2c4764caa28b520cbda085, type: 2}
+  boneScaleProfiles:
+  - {fileID: 11400000, guid: eab2529facc363a4a8dc7a45fc5de8f7, type: 2}
+  - {fileID: 11400000, guid: a2cdc90884d9986479ad4c28b90f5768, type: 2}
+  - {fileID: 11400000, guid: 4f1efbfd36b62214c941d2e72c1b7f96, type: 2}
+  - {fileID: 11400000, guid: 56d5b5a81887bd94ab99b1ac8f8d589e, type: 2}
