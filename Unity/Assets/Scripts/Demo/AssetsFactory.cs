@@ -1,10 +1,8 @@
-﻿using Assets.Scripts.CharacterDeformation.Controller;
-using Assets.Scripts.CharacterDeformation.Model;
-using Erter.CharacterDeformation;
-using System.Collections.Generic;
+﻿using Andre.RigDeformation.Controller;
+using Andre.RigDeformation.Model;
 using UnityEngine;
 
-namespace Erter.Demo
+namespace Andre.Demo
 {
 	public class AssetsFactory
 	{
