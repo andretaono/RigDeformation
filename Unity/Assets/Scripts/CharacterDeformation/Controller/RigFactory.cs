@@ -15,7 +15,7 @@ namespace Erter.CharacterDeformation
 			{
 				if (allKeys.Contains(t.name))
 				{
-					rig.Bones.Add(new Bone(t.name, t));
+					rig.AddBone(new Bone(t.name, t));
 				}
 			}
 

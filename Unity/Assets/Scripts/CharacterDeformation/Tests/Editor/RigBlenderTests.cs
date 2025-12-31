@@ -13,7 +13,7 @@ public class RigBlenderTests
 		var bone = new FakeBone();
 		const string boneKey = "Spine";
 
-		rig.AddBone(boneKey, bone);
+		rig.AddBone(bone);
 
 		var startScale = new Vector3(1f, 1f, 1f);
 		var endScale = new Vector3(2f, 2f, 2f);

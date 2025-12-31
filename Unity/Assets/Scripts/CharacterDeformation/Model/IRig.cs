@@ -6,7 +6,8 @@ namespace Assets.Scripts.CharacterDeformation.Model
 {
 	public interface IRig
 	{
-		List<IBone> Bones { get; } // TODO: Encapsulate this in Add function
+		void AddBone(IBone bone);
 		IBone GetBone(string key);
+
 	}
 }

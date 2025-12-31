@@ -5,16 +5,24 @@ namespace Assets.Scripts.CharacterDeformation.Model
 {
 	public class Rig : IRig
 	{
-		public List<IBone> Bones { get; }
+		private readonly List<IBone> _bones = new();
+		private Dictionary<string, IBone> _bonesByKey;
 
-		public Rig() {
-			Bones = new List<IBone>();
-			// TODO: Cache in dict for faster lookups
-			//_bonesByKey = Bones.ToDictionary(b => b.Key);
+		public Rig()
+		{
+			_bonesByKey = new Dictionary<string, IBone>();
 		}
 
-		public IBone GetBone(string key) {
-			return Bones.Find(b => b.Key == key);
+		public void AddBone(IBone bone)
+		{
+			_bones.Add(bone);
+			// Dictionary for faster per-frame lookups
+			_bonesByKey[bone.Key] = bone;
+		}
+
+		public IBone GetBone(string key)
+		{
+			return _bonesByKey[key];
 		}
 	}
 }

@@ -5,4 +5,5 @@ using UnityEngine;
 public class BoneKeyDefinition : ScriptableObject
 {
 	public List<string> boneKeys = new List<string> ();
+	// TODO: make immutable at runtime? : public IReadOnlyList<string> BoneKeys => boneKeys.boneKeys;
 }

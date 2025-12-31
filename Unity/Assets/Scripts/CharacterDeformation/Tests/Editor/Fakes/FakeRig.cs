@@ -8,9 +8,9 @@ class FakeRig : IRig
 
 	public List<IBone> Bones => throw new System.NotImplementedException();
 
-	public void AddBone(string key, IBone bone)
+	public void AddBone(IBone bone)
 	{
-		_bones[key] = bone;
+		_bones[bone.Key] = bone;
 	}
 
 	public IBone GetBone(string key)

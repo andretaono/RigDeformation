@@ -13,16 +13,32 @@ public class BoneScaleProfile : ScriptableObject, IBoneScaleProfile
 	// Optional runtime lookup cache TODO: is this needed?
 	//private Dictionary<string, Vector3> _lookup;
 
+	private Dictionary<string, Vector3> _scaleLookup;
+
+	private void OnEnable()
+	{
+		BuildLookup();
+	}
+
+	// Generate lookup dictionary for faster per-frame lookups
+	private void BuildLookup()
+	{
+		_scaleLookup = new Dictionary<string, Vector3>(scales.Count);
+
+		foreach (var entry in scales)
+		{
+			_scaleLookup[entry.boneKey] = entry.scale;
+		}
+	}
+
 	public Vector3 GetScale(string boneKey)
 	{
-		return scales.Find((e) => e.boneKey == boneKey).scale;
+		return _scaleLookup[boneKey];
 	}
 
 	public void SetScale(string boneKey, Vector3 scale)
 	{
-// TODO: optimize - this could the dictionary lookup might be good to add back here.
-		var entry = scales.Find((e) => e.boneKey == boneKey);
-
-		entry.scale = scale;
+		_scaleLookup[boneKey] = scale;
 	}
+
 }
