@@ -3,10 +3,17 @@ using UnityEngine;
 
 namespace Andre.RigDeformation.Model
 {
-	[CreateAssetMenu(menuName = "Rig Deformation/Bone Key Definition")]
+	[CreateAssetMenu(menuName = "Andre/Rig Deformation/Bone Key Definition")]
 	public class BoneKeyDefinition : ScriptableObject
 	{
-		public List<string> boneKeys = new List<string>();
-		// TODO: make immutable at runtime? : public IReadOnlyList<string> BoneKeys => boneKeys.boneKeys;
+		[SerializeField]
+		private List<string> boneKeys = new();
+
+		public IReadOnlyList<string> BoneKeys => boneKeys;
+
+		public bool Contains(string key)
+		{
+			return boneKeys.Contains(key);
+		}
 	}
 }

@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Andre.RigDeformation.Model
 {
-	public class Rig : IRig
+	public class Rig
 	{
-		private readonly List<IBone> _bones = new();
-		private Dictionary<string, IBone> _bonesByKey;
+		private Dictionary<string, Transform> bones;
 
 		public Rig()
 		{
-			_bonesByKey = new Dictionary<string, IBone>();
+			bones = new Dictionary<string, Transform>();
 		}
 
-		public void AddBone(IBone bone)
+		public void AddBone(string key, Transform transform)
 		{
-			_bones.Add(bone);
 			// Dictionary for faster per-frame lookups
-			_bonesByKey[bone.Key] = bone;
+			bones[key] = transform;
 		}
 
-		public IBone GetBone(string key)
+		public Transform GetBone(string key)
 		{
-			return _bonesByKey[key];
+			return bones[key];
 		}
 	}
 }

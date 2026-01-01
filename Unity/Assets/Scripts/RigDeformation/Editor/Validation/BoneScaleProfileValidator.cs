@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using Andre.RigDeformation.Model;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,38 +30,38 @@ namespace Andre.RigDeformation.Editor.Validation
 
 		public static void Validate(BoneScaleProfile profile)
 		{
-			if (profile == null || profile.boneKeys == null)
+			if (profile == null || profile.BoneKeyDefinitionEditor == null)
 			{
 				Debug.LogError($"{profile.name}: Missing assignment.");
 				return;
 			}
 
-			var definitionKeys = profile.boneKeys.boneKeys;
+			var definitionKeys = profile.BoneKeyDefinitionEditor.BoneKeys;
 			var profileKeys = new HashSet<string>();
 
-			foreach (var entry in profile.scales)
+			foreach (var entry in profile.BoneScaleEntries)
 			{
-				profileKeys.Add(entry.boneKey);
+				profileKeys.Add(entry.Key);
 			}
 
 			// Must have the same number of entries...
 
-			if (profile.scales.Count != definitionKeys.Count)
+			if (profile.BoneScaleEntries.Count != definitionKeys.Count)
 			{
 				Debug.LogError(
-					$"{profile.name}: Entry count ({profile.scales.Count}) " +
+					$"{profile.name}: Entry count ({profile.BoneScaleEntries.Count}) " +
 					$"does not match required count ({definitionKeys.Count}).");
 				return;
 			}
 
 			// ... and all entries must have an id matching the reference...
 
-			foreach (var entry in profile.scales)
+			foreach (var entry in profile.BoneScaleEntries)
 			{
-				if (!definitionKeys.Contains(entry.boneKey))
+				if (!definitionKeys.Any(k => k == entry.Key))
 				{
 					Debug.LogError(
-						$"{profile.name}: Invalid key '{entry.boneKey}'.");
+						$"{profile.name}: Invalid key '{entry.Key}'.");
 					return;
 				}
 			}

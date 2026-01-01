@@ -7,15 +7,18 @@ namespace Andre.Demo
 	public class AssetsFactory
 	{
 		private IRigFactory rigFactory;
-		private IBoneScaleRegistry boneScaleRegistry;
+		private BoneKeyDefinition boneKeyDefinition;
+		private BoneScaleRegistry boneScaleRegistry;
 		private IRigBlender rigBlender;
 
 		public AssetsFactory(
 			IRigFactory rigFactory,
-			IBoneScaleRegistry boneScaleRegistry,
+			BoneKeyDefinition boneKeyDefinition,
+			BoneScaleRegistry boneScaleRegistry,
 			IRigBlender rigBlender)
 		{
 			this.rigFactory = rigFactory;
+			this.boneKeyDefinition = boneKeyDefinition;
 			this.boneScaleRegistry = boneScaleRegistry;
 			this.rigBlender = rigBlender;
 		}
@@ -28,7 +31,7 @@ namespace Andre.Demo
 			humanoidCharacterRig.AddComponent<BoneScalerUpdate>();
 			var boneScalerUpdate = humanoidCharacterRig.AddComponent<BoneScalerUpdate>();
 			var rootBoneProvider = humanoidCharacterRig.AddComponent<RootBoneProvider>();
-			var rig = rigFactory.BuildRig(rootBoneProvider, boneScaleRegistry.BoneKeyDefinition.boneKeys);
+			var rig = rigFactory.CreateRig(rootBoneProvider, boneKeyDefinition);
 			boneScalerUpdate.Init(boneScaleRegistry, rig, rigBlender);
 		}
 

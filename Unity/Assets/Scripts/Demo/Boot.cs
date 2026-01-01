@@ -8,12 +8,20 @@ namespace Andre.Demo
 	{
 		public void Awake()
 		{
-			var boneScaleRegistry = Resources.Load("BoneScaleRegistry") as IBoneScaleRegistry;
+			var boneScaleRegistry = Resources.Load("Data/BoneScaleRegistry") as BoneScaleRegistry;
 
-			var characterDeformationSystem = new CharacterDeformationSystem(boneScaleRegistry);
+			var linearScaleInterpolator = new LinearScaleInterpolator();
+
+			var characterDeformationSystem = new CharacterDeformationSystem(
+				linearScaleInterpolator, 
+				boneScaleRegistry);
+
+			// TODO: Make Resources loader class
+			var boneKeyDefinition = Resources.Load("Data/BoneKeyDefinition") as BoneKeyDefinition;
 
 			var assetsFactory = new AssetsFactory(
 				characterDeformationSystem.RigFactory,
+				boneKeyDefinition,
 				boneScaleRegistry,
 				characterDeformationSystem.RigBlender);
 

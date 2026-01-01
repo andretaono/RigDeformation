@@ -32,7 +32,7 @@ namespace Andre.RigDeformation.Editor.Validation
 			if (definition == null)
 				return;
 
-			if (definition.boneKeys == null || definition.boneKeys.Count == 0)
+			if (definition.BoneKeys == null || definition.BoneKeys.Count == 0)
 			{
 				Debug.LogError($"{definition.name}: List is null or empty.", definition);
 				return;
@@ -40,9 +40,9 @@ namespace Andre.RigDeformation.Editor.Validation
 
 			var seenKeys = new HashSet<string>();
 
-			for (int i = 0; i < definition.boneKeys.Count; i++)
+			for (int i = 0; i < definition.BoneKeys.Count; i++)
 			{
-				var key = definition.boneKeys[i];
+				var key = definition.BoneKeys[i];
 
 				// Empty / whitespace
 				if (string.IsNullOrWhiteSpace(key))

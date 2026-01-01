@@ -4,18 +4,19 @@ using UnityEngine;
 namespace Andre.RigDeformation.Model
 {
 
-	[CreateAssetMenu(menuName = "Rig Deformation/Bone Scale Profile")]
-	public class BoneScaleProfile : ScriptableObject, IBoneScaleProfile
+	[CreateAssetMenu(menuName = "Andre/Rig Deformation/Bone Scale Profile")]
+	public class BoneScaleProfile : ScriptableObject
 	{
-		public BoneKeyDefinition boneKeys;
+		[SerializeField]
+		private BoneKeyDefinition boneKeyDefinition;
 
-		public List<BoneScaleEntry> scales = new List<BoneScaleEntry>();
-		public List<BoneScaleEntry> ScaleEntries => scales;
+		[SerializeField]
+		private List<BoneScaleEntry> boneScaleEntries = new List<BoneScaleEntry>();
 
-		// Optional runtime lookup cache TODO: is this needed?
-		//private Dictionary<string, Vector3> _lookup;
+		public IReadOnlyDictionary<string, Vector3> BoneScaleEntries => scaleLookup;
+		public BoneKeyDefinition BoneKeyDefinition => boneKeyDefinition;
 
-		private Dictionary<string, Vector3> _scaleLookup;
+		private Dictionary<string, Vector3> scaleLookup;
 
 		private void OnEnable()
 		{
@@ -25,23 +26,18 @@ namespace Andre.RigDeformation.Model
 		// Generate lookup dictionary for faster per-frame lookups
 		private void BuildLookup()
 		{
-			_scaleLookup = new Dictionary<string, Vector3>(scales.Count);
+			scaleLookup = new Dictionary<string, Vector3>(boneScaleEntries.Count);
 
-			foreach (var entry in scales)
+			foreach (var entry in boneScaleEntries)
 			{
-				_scaleLookup[entry.boneKey] = entry.scale;
+				scaleLookup[entry.boneKey] = entry.scale;
 			}
 		}
 
-		public Vector3 GetScale(string boneKey)
-		{
-			return _scaleLookup[boneKey];
-		}
-
-		public void SetScale(string boneKey, Vector3 scale)
-		{
-			_scaleLookup[boneKey] = scale;
-		}
+#if UNITY_EDITOR
+		public List<BoneScaleEntry> BoneScaleEntriesEditor => boneScaleEntries;
+		public BoneKeyDefinition BoneKeyDefinitionEditor => boneKeyDefinition;
+#endif
 
 	}
 }

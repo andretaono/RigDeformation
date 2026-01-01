@@ -6,7 +6,7 @@ namespace Andre.Demo
 {
 	public class BoneScalerUpdate : MonoBehaviour
 	{
-		private IBoneScaleRegistry boneScaleRegistry;
+		private BoneScaleRegistry boneScaleRegistry;
 		private IRigBlender rigBlender;
 
 		private float transitionDuration = 2f;
@@ -18,11 +18,11 @@ namespace Andre.Demo
 
 		public Transform rootBone;
 
-		private IRig rig;
+		private Rig rig;
 
 		public void Init(
-			IBoneScaleRegistry boneScaleRegistry,
-			IRig rig,
+			BoneScaleRegistry boneScaleRegistry,
+			Rig rig,
 			IRigBlender rigBlender)
 		{
 			this.boneScaleRegistry = boneScaleRegistry;
@@ -48,12 +48,12 @@ namespace Andre.Demo
 			currentIndex = (int)(timer / totalSegmentTime) % boneScaleRegistry.BoneScaleProfiles.Count;
 			int nextIndex = (currentIndex + 1) % boneScaleRegistry.BoneScaleProfiles.Count;
 
-			IBoneScaleProfile start = boneScaleRegistry.BoneScaleProfiles[currentIndex];
-			IBoneScaleProfile end = boneScaleRegistry.BoneScaleProfiles[nextIndex];
+			BoneScaleProfile start = boneScaleRegistry.BoneScaleProfiles[currentIndex];
+			BoneScaleProfile end = boneScaleRegistry.BoneScaleProfiles[nextIndex];
 
 			float t = Mathf.Clamp01(segmentTime / transitionDuration);
 
-			rigBlender.BlendProfiles(rig, start, end, t);
+			rigBlender.BlendProfiles(rig, start.BoneScaleEntries, end.BoneScaleEntries, t);
 		}
 	}
 }

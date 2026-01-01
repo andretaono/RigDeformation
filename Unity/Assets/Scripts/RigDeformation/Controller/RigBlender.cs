@@ -1,23 +1,33 @@
 ﻿using Andre.RigDeformation.Model;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Andre.RigDeformation.Controller
 {
-	public class RigBlender : IRigBlender
+	public sealed class RigBlender : IRigBlender
 	{
+		private readonly IScaleInterpolator scaleInterpolator;
+
+		public RigBlender(IScaleInterpolator scaleInterpolator)
+		{
+			this.scaleInterpolator = scaleInterpolator;
+		}
+
 		public void BlendProfiles(
-			IRig rig,
-			IBoneScaleProfile start,
-			IBoneScaleProfile end,
+			Rig rig,
+			IReadOnlyDictionary<string, Vector3> startScales,
+			IReadOnlyDictionary<string, Vector3> endScales,
 			float t)
 		{
-
-			foreach (var boneScaleEntry in start.ScaleEntries)
+			foreach (var (boneKey, startScale) in startScales)
 			{
-				var endBoneScale = end.GetScale(boneScaleEntry.boneKey);
-				var lerpValue = Vector3.Lerp(start.GetScale(boneScaleEntry.boneKey), endBoneScale, t);
-				var bone = rig.GetBone(boneScaleEntry.boneKey);
-				bone.SetScale(lerpValue);
+				// TODO: Is this check needed? Better to just let it fail?
+				if (!endScales.TryGetValue(boneKey, out var endScale))
+					continue;
+
+				var blended = scaleInterpolator.Interpolate(startScale, endScale, t);
+				var bone = rig.GetBone(boneKey);
+				bone.localScale = blended;
 			}
 		}
 	}

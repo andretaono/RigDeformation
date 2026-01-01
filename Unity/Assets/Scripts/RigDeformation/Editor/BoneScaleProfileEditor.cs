@@ -15,14 +15,14 @@ namespace Andre.RigDeformation.Editor
 
 			var profile = (BoneScaleProfile)target;
 
-			if (profile.boneKeys != null &&
+			if (profile.BoneKeyDefinition.BoneKeys != null &&
 				GUILayout.Button("Sync From Bone Keys"))
 			{
-				profile.scales.Clear();
+				profile.BoneScaleEntriesEditor.Clear();
 
-				foreach (var key in profile.boneKeys.boneKeys)
+				foreach (var key in profile.BoneKeyDefinitionEditor.BoneKeys)
 				{
-					profile.scales.Add(new BoneScaleEntry
+					profile.BoneScaleEntriesEditor.Add(new BoneScaleEntry
 					{
 						boneKey = key,
 						scale = Vector3.one

@@ -7,11 +7,14 @@ namespace Andre.RigDeformation
 	{
 		public IRigFactory RigFactory { get; private set; }
 		public IRigBlender RigBlender { get; private set; }
-		public IBoneScaleRegistry BoneScaleRegistry { get; private set; }
+		public BoneScaleRegistry BoneScaleRegistry { get; private set; }
 
-		public CharacterDeformationSystem(IBoneScaleRegistry boneScaleRegistry) {
+		public CharacterDeformationSystem(
+			IScaleInterpolator scaleInterpolator, 
+			BoneScaleRegistry boneScaleRegistry) 
+		{
 			RigFactory = new RigFactory();
-			RigBlender = new RigBlender();
+			RigBlender = new RigBlender(scaleInterpolator);
 			BoneScaleRegistry = boneScaleRegistry;
 		}
 	}
