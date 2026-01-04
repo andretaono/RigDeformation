@@ -3,6 +3,16 @@ using UnityEngine;
 
 namespace Andre.RigDeformation.Controller
 {
+
+	/// <summary>
+	/// Constructs a runtime <see cref="Rig"/> by mapping scene transforms
+	/// to bone keys defined in a <see cref="BoneKeyDefinition"/>.
+	/// </summary>
+	/// <remarks>
+	/// The factory is responsible for discovering the root bone,
+	/// traversing the transform hierarchy, and registering only those
+	/// transforms whose names match known bone keys.
+	/// </remarks>
 	public class RigFactory : IRigFactory
 	{
 		private BoneKeyDefinition boneKeyDefinition;

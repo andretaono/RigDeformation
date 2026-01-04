@@ -3,6 +3,16 @@ using UnityEngine;
 
 namespace Andre.Demo
 {
+
+	/// <summary>
+	/// Composition root and entry point for the demo scene.
+	/// Sets up the rig deformation system, loads resources, handles DI 
+	/// and instantiates key demo objects (character, camera, light).
+	/// </summary>
+	/// <remarks>
+	/// This MonoBehaviour is intended to be attached to a single GameObject
+	/// in the scene. It wires together the system and demo domains.
+	/// </remarks>
 	public class Boot : MonoBehaviour
 	{
 		public void Awake()

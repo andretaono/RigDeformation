@@ -2,6 +2,16 @@
 
 namespace Andre.RigDeformation.Controller
 {
+
+	/// <summary>
+	/// Applies blended bone scale data from two <see cref="BoneScaleProfile"/>s
+	/// onto a runtime <see cref="Rig"/>.
+	/// </summary>
+	/// <remarks>
+	/// The blending logic is agnostic of interpolation math and delegates
+	/// value interpolation to an injected <see cref="IScaleInterpolator"/>.
+	/// Bone scale data is sourced from a shared <see cref="BoneScaleRegistry"/>.
+	/// </remarks>
 	public sealed class RigBlender : IRigBlender
 	{
 		private readonly IScaleInterpolator scaleInterpolator;
@@ -17,34 +27,16 @@ namespace Andre.RigDeformation.Controller
 
 		public void BlendProfiles(Rig rig, int startIndex, int endIndex, float t)
 		{
-			if (!IsAllowedToProceed())
-				return;
-
 			var startScales = boneScaleRegistry.BoneScaleProfiles[startIndex].BoneScaleEntries;
 			var endScales = boneScaleRegistry.BoneScaleProfiles[endIndex].BoneScaleEntries;
 
 			foreach (var (boneKey, startScale) in startScales)
 			{
-				// TODO: Is this check needed? Better to just let it fail?
-				if (!endScales.TryGetValue(boneKey, out var endScale))
-					continue;
-
+				var endScale = endScales[boneKey];
 				var blended = scaleInterpolator.Interpolate(startScale, endScale, t);
 				var bone = rig.GetBone(boneKey);
 				bone.localScale = blended;
 			}
-		}
-
-		private bool IsAllowedToProceed()
-		{
-			// TODO: Are these checks necessary?
-			if (boneScaleRegistry == null)
-				return false;
-
-			if (boneScaleRegistry.BoneScaleProfiles.Count < 2)
-				return false;
-
-			return true;
 		}
 	}
 }

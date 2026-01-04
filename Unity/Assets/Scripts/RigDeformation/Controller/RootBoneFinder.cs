@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace Andre.RigDeformation.Controller
 {
+
+	/// <summary>
+	/// Locates the root bone transform within a hierarchy based on a configured key.
+	/// </summary>
+	/// <remarks>
+	/// The root bone key is provided externally to avoid hard-coded naming
+	/// assumptions and to support different skeleton conventions.
+	/// </remarks>
 	public class RootBoneFinder
 	{
 		private IRootBoneKeyProvider rootBoneKeyProvider;
