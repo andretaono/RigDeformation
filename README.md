@@ -1,18 +1,104 @@
-# RigDeformation
-
-Procedural manipulation of a skeletal rig for runtime morphing of character model.
+\# Rig Deformation System
 
 
 
-This is a proof-of-concept for a procedural rig deformation system. It is intended to be used as part of a larger game project which centers around a shapeshifting game mechanic. The purpose is to get awesome visual transformations of the 3D player character.
+A reusable module for procedural application of bone-scale deformation to character rigs using data-driven profiles. This is part of a solution to create visual transformation of a character model.
 
 
 
-\- It uses dependency injection, handled in Boot.cs
+---
 
-\- Separation of concerns: the system functionality is found in the CharacterDeformation folder, while the Demo folder holds scripts related to the specific project (in this case a visual demonstration).
 
-\- Interface abstractions in the system layer are concretized in the project layer.
 
-\- Everything is handled from scripts, including asset instantiation and component handling (see AssetsFactory.cs).
+\## What it does
+
+
+
+\- Defines a shared set of bone identifiers (`BoneKeyDefinition`)
+
+\- Stores per-bone scale data in profiles (`BoneScaleProfile`)
+
+\- Builds a runtime rig from a character hierarchy (`RigFactory`)
+
+\- Blends between scale profiles efficiently at runtime (`RigBlender`)
+
+\- Supports pluggable interpolation logic (`IScaleInterpolator`)
+
+
+
+---
+
+
+
+\## Design principles
+
+
+
+\- \*\*Reusable module\*\* – `Andre.RigDeformation` namespace is independent of demo or presentation code  
+
+\- \*\*Data-driven\*\* – deformation behavior defined via ScriptableObjects  
+
+\- \*\*Runtime-safe\*\* – assets are immutable at runtime  
+
+\- \*\*Performance-aware\*\* – dictionary lookups, no per-frame allocations  
+
+
+
+---
+
+
+
+\## What this system does NOT handle
+
+
+
+\- Asset loading (Resources / Addressables)
+
+\- Animation timing or sequencing
+
+\- MonoBehaviour lifecycles
+
+\- Scene setup or presentation logic
+
+
+
+These concerns belong to the consuming project.
+
+
+
+---
+
+
+
+\## Demo project
+
+
+
+The `Andre.Demo` namespace contains a reference implementation showing how to:
+
+
+
+\- Load assets
+
+\- Drive blending over time
+
+\- Integrate with a character prefab
+
+
+
+The demo is optional and not required to use the system.
+
+
+
+---
+
+
+
+\## Version
+
+
+
+\*\*v1.0.0\*\* – Bone scale deformation with profile blending
+
+
 
