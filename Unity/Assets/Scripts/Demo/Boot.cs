@@ -1,5 +1,4 @@
 using Andre.RigDeformation;
-using Andre.RigDeformation.Model;
 using UnityEngine;
 
 namespace Andre.Demo
@@ -8,25 +7,29 @@ namespace Andre.Demo
 	{
 		public void Awake()
 		{
-			var boneScaleRegistry = Resources.Load("Data/BoneScaleRegistry") as BoneScaleRegistry;
-
 			var linearScaleInterpolator = new LinearScaleInterpolator();
 
-			var characterDeformationSystem = new CharacterDeformationSystem(
+			var resourceLoader = new ResourceLoader();
+
+			var boneScaleRegistry = resourceLoader.LoadBoneScaleRegistry();
+
+			var boneScaleDefinition = resourceLoader.LoadBoneKeyDefinition();
+
+			var rigDeformationSystem = new RigDeformationSystem(
 				linearScaleInterpolator, 
-				boneScaleRegistry);
-
-			// TODO: Make Resources loader class
-			var boneKeyDefinition = Resources.Load("Data/BoneKeyDefinition") as BoneKeyDefinition;
-
-			var assetsFactory = new AssetsFactory(
-				characterDeformationSystem.RigFactory,
-				boneKeyDefinition,
 				boneScaleRegistry,
-				characterDeformationSystem.RigBlender);
+				boneScaleDefinition,
+				new RootBoneKeyProvider());
 
-			assetsFactory.CreateHumanoidCharacterRig();
-			assetsFactory.CreateCamera();
+			var assetFactory = new AssetFactory(
+				rigDeformationSystem.RigFactory,
+				rigDeformationSystem.RigBlender,
+				resourceLoader,
+				boneScaleRegistry.BoneScaleProfiles.Count);
+
+			assetFactory.CreateCharacter();
+			assetFactory.CreateCamera();
+			assetFactory.CreateLight();
 		}
 	}
 }

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02cecc5a9155a1499a6517a1c5e76c1, type: 3}
   m_Name: BoneScaleProfileBear
   m_EditorClassIdentifier: 
-  boneKeys: {fileID: 11400000, guid: 358e7ed6ab2c4764caa28b520cbda085, type: 2}
-  scales:
+  boneKeyDefinition: {fileID: 11400000, guid: 358e7ed6ab2c4764caa28b520cbda085, type: 2}
+  boneScaleEntries:
   - boneKey: mixamorig:Hips
-    scale: {x: 1.2, y: 1.2, z: 1.2}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:LeftUpLeg
     scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:LeftLeg
@@ -29,28 +29,28 @@ MonoBehaviour:
   - boneKey: mixamorig:RightFoot
     scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:Spine
-    scale: {x: 1.4, y: 1.5, z: 1.4}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:Spine1
-    scale: {x: 1.2, y: 1, z: 1.2}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:Spine2
-    scale: {x: 1.2, y: 1.2, z: 1.2}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:LeftShoulder
-    scale: {x: 1.2, y: 1.6, z: 1}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:LeftArm
-    scale: {x: 1, y: 0.8, z: 1}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:LeftForeArm
-    scale: {x: 0.8, y: 1, z: 0.8}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:LeftHand
-    scale: {x: 1.4, y: 1.4, z: 1.4}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:Neck
     scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:Head
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:RightShoulder
-    scale: {x: 1.2, y: 1.6, z: 1}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:RightArm
-    scale: {x: 1, y: 0.8, z: 1}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:RightForeArm
-    scale: {x: 0.8, y: 1, z: 0.8}
+    scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:RightHand
-    scale: {x: 1.4, y: 1.4, z: 1.4}
+    scale: {x: 1, y: 1, z: 1}

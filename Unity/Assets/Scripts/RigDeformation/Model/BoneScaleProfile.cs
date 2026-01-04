@@ -30,13 +30,12 @@ namespace Andre.RigDeformation.Model
 
 			foreach (var entry in boneScaleEntries)
 			{
-				scaleLookup[entry.boneKey] = entry.scale;
+				scaleLookup[entry.BoneKey] = entry.Scale;
 			}
 		}
 
 #if UNITY_EDITOR
 		public List<BoneScaleEntry> BoneScaleEntriesEditor => boneScaleEntries;
-		public BoneKeyDefinition BoneKeyDefinitionEditor => boneKeyDefinition;
 #endif
 
 	}

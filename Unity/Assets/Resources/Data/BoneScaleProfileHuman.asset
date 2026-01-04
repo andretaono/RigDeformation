@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02cecc5a9155a1499a6517a1c5e76c1, type: 3}
   m_Name: BoneScaleProfileHuman
   m_EditorClassIdentifier: 
-  boneKeys: {fileID: 11400000, guid: 358e7ed6ab2c4764caa28b520cbda085, type: 2}
-  scales:
+  boneKeyDefinition: {fileID: 11400000, guid: 358e7ed6ab2c4764caa28b520cbda085, type: 2}
+  boneScaleEntries:
   - boneKey: mixamorig:Hips
     scale: {x: 1, y: 1, z: 1}
   - boneKey: mixamorig:LeftUpLeg

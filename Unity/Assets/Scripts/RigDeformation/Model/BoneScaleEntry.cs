@@ -3,11 +3,22 @@ using UnityEngine;
 
 namespace Andre.RigDeformation.Model
 {
-	// TODO: Should this be a struct?
 	[Serializable]
-	public struct BoneScaleEntry
+	public class BoneScaleEntry
 	{
-		public string boneKey;
-		public Vector3 scale;
+		[SerializeField]
+		private string boneKey;
+
+		[SerializeField]
+		private Vector3 scale;
+
+		public string BoneKey => boneKey;
+		public Vector3 Scale => scale;
+
+		public BoneScaleEntry(string boneKey, Vector3 scale)
+		{
+			this.boneKey = boneKey;
+			this.scale = scale;
+		}
 	}
 }

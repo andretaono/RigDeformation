@@ -5,11 +5,23 @@ namespace Andre.RigDeformation.Controller
 {
 	public class RigFactory : IRigFactory
 	{
-		public Rig CreateRig(IRootBoneProvider rootBoneProvider, BoneKeyDefinition boneKeyDefinition)
+		private BoneKeyDefinition boneKeyDefinition;
+		private RootBoneFinder rootBoneFinder;
+
+		public RigFactory(
+			BoneKeyDefinition boneKeyDefinition,
+			RootBoneFinder rootBoneFinder) 
+		{
+			this.boneKeyDefinition = boneKeyDefinition;
+			this.rootBoneFinder = rootBoneFinder;
+		}
+
+		public Rig CreateRig(Transform transform)
 		{
 			var rig = new Rig();
+			var rootBone = rootBoneFinder.TryFindRootBone(transform);
 
-			foreach (Transform t in rootBoneProvider.RootBone.GetComponentsInChildren<Transform>())
+			foreach (Transform t in rootBone.GetComponentsInChildren<Transform>())
 			{
 				if (boneKeyDefinition.Contains(t.name))
 				{

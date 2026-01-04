@@ -1,9 +1,10 @@
 ﻿using Andre.RigDeformation.Model;
+using UnityEngine;
 
 namespace Andre.RigDeformation.Controller
 {
 	public interface IRigFactory
 	{
-		Rig CreateRig(IRootBoneProvider rootBoneProvider, BoneKeyDefinition boneKeyDefinition);
+		Rig CreateRig(Transform transform);
 	}
 }

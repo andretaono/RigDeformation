@@ -30,13 +30,13 @@ namespace Andre.RigDeformation.Editor.Validation
 
 		public static void Validate(BoneScaleProfile profile)
 		{
-			if (profile == null || profile.BoneKeyDefinitionEditor == null)
+			if (profile == null || profile.BoneKeyDefinition == null)
 			{
 				Debug.LogError($"{profile.name}: Missing assignment.");
 				return;
 			}
 
-			var definitionKeys = profile.BoneKeyDefinitionEditor.BoneKeys;
+			var definitionKeys = profile.BoneKeyDefinition.BoneKeys;
 			var profileKeys = new HashSet<string>();
 
 			foreach (var entry in profile.BoneScaleEntries)

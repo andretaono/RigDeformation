@@ -6,54 +6,87 @@ namespace Andre.Demo
 {
 	public class BoneScalerUpdate : MonoBehaviour
 	{
-		private BoneScaleRegistry boneScaleRegistry;
-		private IRigBlender rigBlender;
-
-		private float transitionDuration = 2f;
-		private float holdDuration = 2f;
-		private float timer;
-		private int currentIndex = 0;
-
-		// ---
-
-		public Transform rootBone;
+		private const float TRANSITION_DURATION = 2f;
+		private const float HOLD_DURATION = 2f;
 
 		private Rig rig;
+		private IRigBlender rigBlender;
+		private float totalSegmentTime;
+		private float timer;
+		private int boneScaleProfilesCount;
 
 		public void Init(
-			BoneScaleRegistry boneScaleRegistry,
 			Rig rig,
-			IRigBlender rigBlender)
+			IRigBlender rigBlender,
+			int boneScaleProfilesCount)
 		{
-			this.boneScaleRegistry = boneScaleRegistry;
 			this.rig = rig;
 			this.rigBlender = rigBlender;
+			this.boneScaleProfilesCount = boneScaleProfilesCount;
+
+			totalSegmentTime = GetTotalSegmentTime();
 		}
 
 		private void Update()
 		{
-			if (boneScaleRegistry == null || rig == null)
+			if (!IsFlowAllowedToProceed())
 				return;
 
-			BlendProfiles();
+			UpdateBlending();
 		}
 
-		private void BlendProfiles()
+		private bool IsFlowAllowedToProceed()
+		{
+			if (rig == null)
+				return false;
+
+			return true;
+		}
+
+		private void UpdateBlending()
+		{
+			UpdateTimer();
+
+			var segmentTime = GetSegmentTime();
+			var currentIndex = GetCurrentIndex(totalSegmentTime);
+			var nextIndex = GetNextIndex(currentIndex);
+
+			DoBlend(segmentTime, currentIndex, nextIndex);
+		}
+
+		private float GetTotalSegmentTime()
+		{
+			return TRANSITION_DURATION + HOLD_DURATION;
+		}
+
+		private float GetSegmentTime()
+		{
+			return timer % totalSegmentTime;
+		}
+
+		private void UpdateTimer()
 		{
 			timer += Time.deltaTime;
+		}
 
-			float totalSegmentTime = transitionDuration + holdDuration;
-			float segmentTime = timer % totalSegmentTime;
+		private int GetCurrentIndex(float totalSegmentTime)
+		{
+			return (int)(timer / totalSegmentTime) % boneScaleProfilesCount;
+		}
 
-			currentIndex = (int)(timer / totalSegmentTime) % boneScaleRegistry.BoneScaleProfiles.Count;
-			int nextIndex = (currentIndex + 1) % boneScaleRegistry.BoneScaleProfiles.Count;
+		private int GetNextIndex(int currentIndex)
+		{
+			return (currentIndex + 1) % boneScaleProfilesCount;
+		}
+		private float GetTime(float segmentTime)
+		{
+			return Mathf.Clamp01(segmentTime / TRANSITION_DURATION);
+		}
 
-			BoneScaleProfile start = boneScaleRegistry.BoneScaleProfiles[currentIndex];
-			BoneScaleProfile end = boneScaleRegistry.BoneScaleProfiles[nextIndex];
-
-			float t = Mathf.Clamp01(segmentTime / transitionDuration);
-
-			rigBlender.BlendProfiles(rig, start.BoneScaleEntries, end.BoneScaleEntries, t);
+		private void DoBlend(float segmentTime, int startIndex, int endIndex)
+		{
+			var t = GetTime(segmentTime);
+			rigBlender.BlendProfiles(rig, startIndex, endIndex, t);
 		}
 	}
 }

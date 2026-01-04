@@ -20,13 +20,10 @@ namespace Andre.RigDeformation.Editor
 			{
 				profile.BoneScaleEntriesEditor.Clear();
 
-				foreach (var key in profile.BoneKeyDefinitionEditor.BoneKeys)
+				foreach (var key in profile.BoneKeyDefinition.BoneKeys)
 				{
-					profile.BoneScaleEntriesEditor.Add(new BoneScaleEntry
-					{
-						boneKey = key,
-						scale = Vector3.one
-					});
+					var boneScaleEntry = new BoneScaleEntry(key, Vector3.one);
+					profile.BoneScaleEntriesEditor.Add(boneScaleEntry);
 				}
 
 				EditorUtility.SetDirty(profile);
