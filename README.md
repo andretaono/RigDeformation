@@ -2,6 +2,8 @@
 
 A reusable module for procedural application of bone-scale deformation to character rigs using data-driven profiles. This is part of a solution to create visual transformation of a character model.
 
+![Rig Deformation Demo](demo.gif)
+
 ---
 
 ## What it does
